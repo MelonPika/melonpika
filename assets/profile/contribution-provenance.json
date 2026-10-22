@@ -1,0 +1,16 @@
+{
+  "username": "MelonPika",
+  "calendarSource": "https://github.com/users/MelonPika/contributions",
+  "fetchedAt": "2026-10-22T10:52:04.304Z",
+  "days": 369,
+  "totalContributions": 17,
+  "snake": {
+    "repository": "Platane/snk",
+    "commit": "d8f6715049803e982ee5ff501b6b9b7d5deeb09b"
+  },
+  "threeDimensionalCalendar": {
+    "repository": "yoshi389111/github-profile-3d-contrib",
+    "commit": "e235d118909be71eb7edb05482a3de4e76156df3"
+  },
+  "note": "Initial calendars generated locally from public HTML. Full contribution-category radar and commit-language pie require the first profile-3d workflow run with its built-in GITHUB_TOKEN."
+}

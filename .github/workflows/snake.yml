@@ -1,0 +1,43 @@
+name: Generate contribution snake
+
+on:
+  schedule:
+    - cron: '27 16 * * *' # 00:27 Asia/Singapore
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/snake.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profile-snake-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - name: Render pastel snake animations
+        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
+        with:
+          github_user_name: MelonPika
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          outputs: |
+            assets/profile/github-snake.svg?color_snake=%23ffaec5&color_dots=%23eee9f4,%23b9edf2,%23d7c4f3,%23ffd3b0,%23ffaec5
+            assets/profile/github-snake-dark.svg?palette=github-dark&color_snake=%23ffaec5&color_dots=%23373341,%23b9edf2,%23d7c4f3,%23ffd3b0,%23ffaec5
+      - name: Publish changed animations
+        run: bash .github/scripts/publish-assets.sh assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
+        env:
+          PROFILE_BRANCH: ${{ github.event.repository.default_branch }}
+          PROFILE_ASSET_KIND: contribution snake
