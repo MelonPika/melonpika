@@ -1,5 +1,36 @@
+# Dependencies, previews, cached downloads, and local archives
 node_modules/
 .cache/
+/.local/
 profile-3d-contrib/
 dist/
 *.log
+
+# Local preview, artwork/bootstrap, and validation tools
+/package.json
+/package-lock.json
+/.github/SETUP.md
+/.github/bootstrap-tsconfig.json
+/.github/scripts/bootstrap-contributions.ts
+/.github/scripts/check-links.mjs
+/.github/scripts/fetch-badges.mjs
+/.github/scripts/preview.mjs
+/.github/scripts/profile.test.mjs
+/.github/scripts/serve-preview.mjs
+/.github/scripts/static-assets.mjs
+/.github/scripts/validate.mjs
+/.github/workflows/validate.yml
+
+# Local provenance notes; displayed images remain tracked
+/assets/profile/public-data.json
+/assets/profile/contribution-provenance.json
+/assets/profile/badges/credentials.json
+
+# Editor and machine-specific files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example

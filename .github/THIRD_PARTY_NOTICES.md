@@ -4,9 +4,9 @@ Design inspiration: [ShadowsLunarfox/ShadowsLunarfox](https://github.com/Shadows
 
 Snake images are generated with [Platane/snk](https://github.com/Platane/snk) and retain the upstream attribution in their SVG descriptions. Generator source downloads are ignored development caches.
 
-Technology badges use [Shields.io](https://shields.io/) and [Simple Icons](https://simpleicons.org/) where available. Brand names and logos belong to their respective owners. The avatar is MelonPika's public GitHub avatar. npm dependency licenses remain in their installed packages; the lockfile identifies exact versions.
+Technology badges use [Shields.io](https://shields.io/) and [Simple Icons](https://simpleicons.org/) where available. Brand names and logos belong to their respective owners. The avatar is MelonPika's public GitHub avatar. Local development dependencies retain their licenses in the installed packages and are recorded in the local lockfile.
 
-IBM SkillsBuild badge images are official artwork downloaded from Credly and displayed with links to their public verification records. The original image URLs and credential details are recorded in `assets/profile/badges/credentials.json`.
+IBM SkillsBuild badge images are official artwork downloaded from Credly and displayed with links to their public verification records in the README. Additional image-source and credential notes are retained locally.
 
 ## github-profile-3d-contrib
 
