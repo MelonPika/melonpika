@@ -6,6 +6,8 @@ Snake images are generated with [Platane/snk](https://github.com/Platane/snk) an
 
 Technology badges use [Shields.io](https://shields.io/) and [Simple Icons](https://simpleicons.org/) where available. Brand names and logos belong to their respective owners. The avatar is MelonPika's public GitHub avatar. npm dependency licenses remain in their installed packages; the lockfile identifies exact versions.
 
+IBM SkillsBuild badge images are official artwork downloaded from Credly and displayed with links to their public verification records. The original image URLs and credential details are recorded in `assets/profile/badges/credentials.json`.
+
 ## github-profile-3d-contrib
 
 Source: [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib)
