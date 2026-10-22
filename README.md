@@ -54,7 +54,30 @@
 
 <h2 align="center">🏅 <samp>Learning &amp; Badges (｡･ω･｡)ﾉ</samp></h2>
 
-<p align="center"><samp>[Add Google Developer profile]</samp> · <samp>[Add Microsoft Learn profile]</samp><br /><sub>Placeholders below reserve space for verified achievements. No badges or certifications are claimed.</sub></p>
+<h3 align="center">IBM SkillsBuild · 2 verified badges</h3>
+
+<table align="center" width="100%">
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="https://www.credly.com/badges/12fc77c7-082f-4446-ae12-36fa75eeabdc/public_url">
+        <img src="assets/profile/badges/ibm-ux-design.png" alt="IBM SkillsBuild — User Experience Design Fundamentals" width="120" height="120" />
+        <br /><strong>User Experience Design<br />Fundamentals</strong>
+      </a>
+      <br /><sub>IBM-SkillsBuild<br />Issued Jul 19, 2026</sub>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="https://www.credly.com/badges/cf26e096-224f-494f-b1dd-d2f0ffde20d9/public_url">
+        <img src="assets/profile/badges/ibm-web-development.png" alt="IBM SkillsBuild — Web Development Fundamentals" width="120" height="120" />
+        <br /><strong>Web Development<br />Fundamentals</strong>
+      </a>
+      <br /><sub>IBM-SkillsBuild<br />Issued Jul 17, 2026</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center"><sub>Click a badge to view its public Credly verification record.</sub></p>
+
+<p align="center"><samp>[Add Google Developer profile]</samp> · <samp>[Add Microsoft Learn profile]</samp><br /><sub>The Google and Microsoft entries below are placeholders for future verified achievements.</sub></p>
 
 <h3 align="center">Google Developer Program</h3>
 

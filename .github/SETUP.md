@@ -22,11 +22,18 @@ Schedules use UTC cron and are approximate. Each generator serializes its own ru
 
 - Edit the visible bio, optional location, creative tools, social links, and learning placeholders directly in `README.md`. Missing details are marked in brackets. No Google or Microsoft achievement has been inferred from an account name.
 - Replace a badge placeholder only after verifying your public achievement link. The two-column Google grid and three-column Microsoft grid match the reference.
+- Two IBM SkillsBuild badges are displayed above those placeholders, using the official images and public Credly verification URLs you supplied. Their titles, issuer, issue dates, and image sources are recorded in `assets/profile/badges/credentials.json`.
 - Edit `featured` in [profile.json](profile.json) to choose public repository names from your account. Seven real projects are included initially; six are clearly labeled as public forks. Missing/private projects fail the refresh while preserving committed cards.
 - The technology badges reflect observed public repository languages, including forks. The statistics language card uses the provider's original-repository calculation. These scopes can differ.
 - Only the repository region between `BEGIN/END featured-repositories` is generated in README. Refreshing preserves edits outside that region.
 - Edit [profile-3d-settings.json](profile-3d-settings.json) for the 3D palette and [snake.yml](workflows/snake.yml) for the snake palette.
 - This repository is configured specifically for MelonPika. A username change also requires updating the explicit accounts in the workflows, README links, badges, and artwork.
+
+## Preview the README locally
+
+Run `npm run preview`, then open **http://127.0.0.1:4173** in your browser. Keep the command running and refresh the browser after saving the README. This renders Markdown, HTML, local SVGs, and images without the GitHub API or an internet connection. Press Ctrl+C to stop. To change ports, run `npm run preview -- --port 4174`.
+
+In VS Code, open `README.md` and press **Ctrl+Shift+V**, or **Ctrl+K**, then **V** for a preview beside the editor. The file opens as source text until you invoke Markdown preview.
 
 ## Local maintenance
 
@@ -45,12 +52,15 @@ npm run validate
 node .github/scripts/static-assets.mjs  # Original header, typing, mascot, footer
 node .github/scripts/fetch-badges.mjs   # Pastel badges and public avatar
 npm run bootstrap                     # Real snake + 3D from the public snapshot
-npm run preview                       # GitHub-rendered desktop/mobile screenshots
+npm run preview                       # Interactive local browser preview
+npm run preview:check                 # GitHub-rendered desktop/mobile screenshots
 ```
 
 `bootstrap` downloads the same pinned upstream source revisions used by Actions into ignored `.cache/vendor/`. It calls the actual snake solver/SVG renderer and actual 3D calendar renderer. Without authenticated contribution-category data, it marks that portion instead of inventing a radar. Its language donut uses verified repository-language percentages; the workflow's full upstream output uses commit languages. `assets/profile/contribution-provenance.json` records the initial bootstrap, not subsequent Actions runs.
 
-`preview` sends this public README to GitHub's Markdown rendering API and uses an installed Chrome/Edge/Chromium browser with GitHub-style CSS. Set `PROFILE_CHROME` if necessary. Screenshots and inspection results go to ignored `.cache/`. This checks sanitization and desktop/mobile layout without publishing the profile; the surrounding GitHub UI is approximated locally.
+`preview` serves the current README and images locally with GitHub-style CSS. It rereads the README on each browser refresh and does not require a browser automation package or a GitHub API request to render.
+
+`preview:check` sends this public README to GitHub's Markdown rendering API and uses an installed Chrome/Edge/Chromium browser with GitHub-style CSS. Set `PROFILE_CHROME` if necessary. Screenshots and inspection results go to ignored `.cache/`, and its temporary server closes after the checks. This checks sanitization and desktop/mobile layout without publishing the profile; the surrounding GitHub UI is approximated locally.
 
 ## Credits and visual differences
 
