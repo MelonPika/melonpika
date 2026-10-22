@@ -194,7 +194,7 @@ async function render(data, config) {
     const repo = data.repositories.find(r => r.name.toLowerCase() === name.toLowerCase());
     if (!repo) throw new Error(`Featured repository is missing or private: ${name}`);
     return repo;
-  });
+  }).filter(repo => repo.fork === false);
   let featured = '<h2>✨ <samp>Featured Repositories (ง •̀_•́)ง</samp></h2>\n';
   selected.forEach((repo, i) => {
     const name = `repositories/repo-${i + 1}`;
@@ -203,7 +203,6 @@ async function render(data, config) {
     featured += `  <a href="${escape(repo.url)}">${picture(name, `${repo.name}${repo.fork ? ' (public fork)' : ''}: ${repo.description || 'Description not provided.'}`, '405')}</a>\n`;
     if (i % 2 === 1 || i === selected.length - 1) featured += '</p>\n';
   });
-  featured += '\n<p align="center"><sub>Public forks are labeled on each card. All projects link to my own GitHub account.</sub></p>';
   let readme = await readFile(path.join(root, 'README.md'), 'utf8');
   readme = replaceSection(readme, 'featured-repositories', featured);
   // Finish all rendering and marker validation before writing any generated file.

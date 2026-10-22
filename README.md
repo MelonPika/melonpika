@@ -112,24 +112,7 @@
 
 <p align="left">
   <a href="https://github.com/MelonPika/NYP"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-1-dark.svg" /><img src="assets/profile/repositories/repo-1-light.svg" alt="NYP: Description not provided." width="405" /></picture></a>
-  <a href="https://github.com/MelonPika/MoonTV"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-2-dark.svg" /><img src="assets/profile/repositories/repo-2-light.svg" alt="MoonTV (public fork): Description not provided." width="405" /></picture></a>
 </p>
-
-<p align="left">
-  <a href="https://github.com/MelonPika/AlgerMusicPlayer"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-3-dark.svg" /><img src="assets/profile/repositories/repo-3-light.svg" alt="AlgerMusicPlayer (public fork): 一个第三方网易云音乐播放器、本地服务、桌面歌词、主题切换" width="405" /></picture></a>
-  <a href="https://github.com/MelonPika/cloudflare-docker-proxy"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-4-dark.svg" /><img src="assets/profile/repositories/repo-4-light.svg" alt="cloudflare-docker-proxy (public fork):  A docker registry proxy run on cloudflare worker." width="405" /></picture></a>
-</p>
-
-<p align="left">
-  <a href="https://github.com/MelonPika/r2-uploader"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-5-dark.svg" /><img src="assets/profile/repositories/repo-5-light.svg" alt="r2-uploader (public fork): Web Interface for Cloudflare R2" width="405" /></picture></a>
-  <a href="https://github.com/MelonPika/FlareDrive-R2"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-6-dark.svg" /><img src="assets/profile/repositories/repo-6-light.svg" alt="FlareDrive-R2 (public fork): 😁基于cloudflare-r2实现的网盘，可以实现文件分享功能" width="405" /></picture></a>
-</p>
-
-<p align="left">
-  <a href="https://github.com/MelonPika/MagiskOnWSALocal"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-7-dark.svg" /><img src="assets/profile/repositories/repo-7-light.svg" alt="MagiskOnWSALocal (public fork): Integrate Magisk root and Google Apps into WSA (Windows Subsystem for Android)" width="405" /></picture></a>
-</p>
-
-<p align="center"><sub>Public forks are labeled on each card. All projects link to my own GitHub account.</sub></p>
 <!-- END featured-repositories -->
 
 <h2 align="center">📊 <samp>GitHub Stats (＾▽＾)</samp></h2>
