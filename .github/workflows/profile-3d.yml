@@ -1,0 +1,51 @@
+name: Generate 3D contributions
+
+on:
+  schedule:
+    - cron: '37 16 * * *' # 00:37 Asia/Singapore
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/profile-3d-settings.json'
+      - '.github/scripts/pastel-3d.mjs'
+      - '.github/workflows/profile-3d.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profile-3d-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Render full animated contribution calendars
+        uses: yoshi389111/github-profile-3d-contrib@e235d118909be71eb7edb05482a3de4e76156df3 # 0.9.3, Node 24
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: MelonPika
+          SETTING_JSON: .github/profile-3d-settings.json
+      - name: Install the light and dark SVGs
+        run: |
+          cp profile-3d-contrib/3d-contributions-light.svg assets/profile/3d-contributions-light.svg
+          cp profile-3d-contrib/3d-contributions-dark.svg assets/profile/3d-contributions-dark.svg
+          node .github/scripts/pastel-3d.mjs assets/profile/3d-contributions-light.svg assets/profile/3d-contributions-dark.svg
+      - name: Publish changed calendars
+        run: bash .github/scripts/publish-assets.sh assets/profile/3d-contributions-light.svg assets/profile/3d-contributions-dark.svg
+        env:
+          PROFILE_BRANCH: ${{ github.event.repository.default_branch }}
+          PROFILE_ASSET_KIND: 3D contributions

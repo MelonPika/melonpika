@@ -1,0 +1,5 @@
+node_modules/
+.cache/
+profile-3d-contrib/
+dist/
+*.log
