@@ -171,6 +171,6 @@
 
 <img src="assets/profile/footer.svg" alt="A pastel waving footer" width="100%" />
 
-<sub>Visual inspiration: <a href="https://github.com/ShadowsLunarfox/ShadowsLunarfox">ShadowsLunarfox's cozy profile</a> · <a href=".github/SETUP.md">Profile setup &amp; credits</a></sub>
+<sub>Visual inspiration: <a href="https://github.com/ShadowsLunarfox/ShadowsLunarfox">ShadowsLunarfox's cozy profile</a> · <a href=".github/THIRD_PARTY_NOTICES.md">Credits</a></sub>
 
 </div>
