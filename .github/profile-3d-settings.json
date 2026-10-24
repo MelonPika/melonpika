@@ -8,7 +8,13 @@
     "weakColor": "#A9B0BC",
     "radarColor": "#B4F5FD",
     "growingAnimation": true,
-    "contribColors": ["#1B2029", "#37444B", "#6D929A", "#B4F5FD", "#FDD879"]
+    "contribColors": [
+      "#1B2029",
+      "#37444B",
+      "#6D929A",
+      "#B4F5FD",
+      "#FDD879"
+    ]
   },
   {
     "fileName": "3d-contributions-dark.svg",
@@ -19,6 +25,12 @@
     "weakColor": "#A9B0BC",
     "radarColor": "#B4F5FD",
     "growingAnimation": true,
-    "contribColors": ["#1B2029", "#37444B", "#6D929A", "#B4F5FD", "#FDD879"]
+    "contribColors": [
+      "#1B2029",
+      "#37444B",
+      "#6D929A",
+      "#B4F5FD",
+      "#FDD879"
+    ]
   }
 ]

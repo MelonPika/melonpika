@@ -181,7 +181,10 @@ export function replaceSection(readme, marker, content) {
   if (readme.split(begin).length !== 2 || readme.split(end).length !== 2 || readme.indexOf(end) < readme.indexOf(begin)) throw new Error(`Invalid README markers: ${marker}`);
   return readme.slice(0, readme.indexOf(begin) + begin.length) + '\n' + content.trim() + '\n' + readme.slice(readme.indexOf(end));
 }
-const picture = (name, alt, width = '100%') => `<picture><source media="(prefers-color-scheme: dark)" srcset="assets/profile/${name}-dark.svg" /><img src="assets/profile/${name}-light.svg" alt="${escape(alt)}" width="${width}" /></picture>`;
+const picture = (name, alt, width = '100%') => `    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/profile/${name}-dark.svg" />
+      <img src="assets/profile/${name}-light.svg" alt="${escape(alt)}" width="${width}" />
+    </picture>`;
 async function render(data, config) {
   if (data.username !== config.username) throw new Error('Snapshot belongs to another account');
   await mkdir(path.join(out, 'repositories'), { recursive: true });
@@ -206,7 +209,7 @@ async function render(data, config) {
     const name = `repositories/repo-${i + 1}`;
     for (const dark of [false, true]) files.set(`${name}-${dark ? 'dark' : 'light'}.svg`, repositoryCard(repo, dark));
     if (i % 2 === 0) featured += '\n<p align="left">\n';
-    featured += `  <a href="${escape(repo.url)}">${picture(name, `${repo.name}${repo.fork ? ' (public fork)' : ''}: ${repo.description || 'Description not provided.'}`, '405')}</a>\n`;
+    featured += `  <a href="${escape(repo.url)}">\n${picture(name, `${repo.name}${repo.fork ? ' (public fork)' : ''}: ${repo.description || 'Description not provided.'}`, '405')}\n  </a>\n`;
     if (i % 2 === 1 || i === selected.length - 1) featured += '</p>\n';
   });
   let readme = await readFile(path.join(root, 'README.md'), 'utf8');
