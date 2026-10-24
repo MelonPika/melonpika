@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { palette as p, languageColor } from './generate-profile.mjs';
+import { boundSnake } from './bounded-snake.mjs';
 
 const replacements = { '#444444': p.muted, ...Object.fromEntries([
   ['Python', ['#3572a5', '#ffe9a3']], ['JavaScript', ['#f1e05a', '#ffd166']],
@@ -10,6 +11,7 @@ const replacements = { '#444444': p.muted, ...Object.fromEntries([
 ].flatMap(([name, colors]) => colors.map(color => [color, languageColor(name)]))) };
 
 export function styleSnake(source) {
+  source = boundSnake(source);
   const variables = { cb: p.border, cs: p.primary, ce: p.surface, c0: p.surface, c1: p.contributionLow, c2: p.contributionMid, c3: p.secondary, c4: p.primary };
   for (const [name, color] of Object.entries(variables)) {
     const pattern = new RegExp(`(--${name}\\s*:)\\s*[^;}]+`, 'g');

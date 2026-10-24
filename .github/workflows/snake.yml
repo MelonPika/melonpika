@@ -9,6 +9,8 @@ on:
     paths:
       - '.github/scripts/generate-profile.mjs'
       - '.github/scripts/pastel-3d.mjs'
+      - '.github/scripts/bounded-snake.mjs'
+      - '.github/scripts/bounded-snake.test.mjs'
       - '.github/workflows/snake.yml'
 
 permissions:
@@ -30,6 +32,9 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
       - name: Render pastel snake animations
         uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
         with:
@@ -38,8 +43,10 @@ jobs:
           outputs: |
             assets/profile/github-snake.svg?color_snake=%23FDD879&color_dots=%231B2029,%2337444B,%236D929A,%23B4F5FD,%23FDD879
             assets/profile/github-snake-dark.svg?palette=github-dark&color_snake=%23FDD879&color_dots=%231B2029,%2337444B,%236D929A,%23B4F5FD,%23FDD879
-      - name: Apply cozy dark background and palette
+      - name: Keep the snake inside the grid and apply the palette
         run: node .github/scripts/pastel-3d.mjs --snake assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
+      - name: Check snake routes and animation bounds
+        run: node --test .github/scripts/bounded-snake.test.mjs
       - name: Publish changed animations
         run: bash .github/scripts/publish-assets.sh assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
         env:
