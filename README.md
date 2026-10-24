@@ -29,7 +29,7 @@
       <sub><em>🌙 Little ideas, pastel skies ✨</em><br /><samp>(ᵔᴥᵔ)</samp></sub>
     </td>
     <td valign="top" width="72%">
-      <p><img src="assets/profile/avatar.png" alt="MelonPika's public GitHub avatar" width="28" height="28" /> 👋 Hi, I'm <strong><samp>MelonPika</samp></strong> 🍈 <samp>(｡･ω･｡)ﾉ</samp><br />
+      <p><img src="assets/profile/melon-fox.svg" alt="MelonPika's public GitHub avatar" width="28" height="28" /> 👋 Hi, I'm <strong><samp>MelonPika</samp></strong> 🍈 <samp>(｡･ω･｡)ﾉ</samp><br />
       A little space for my public projects, experiments, and things I’m exploring.<br />
       <sub>📍 <samp>[Add location · optional]</samp> · <samp>[Add your bio]</samp></sub></p>
       <p><strong>🍡 Coding Languages</strong><br />
