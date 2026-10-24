@@ -22,7 +22,7 @@
 <table align="center" width="100%">
   <tr>
     <td align="center" valign="middle" width="28%">
-      <img src="assets/profile/melon-fox.svg" alt="A pastel moon fox in melon headphones coding on a little laptop" width="100%" />
+      <img src="assets/profile/melon-fox.svg" alt="MelonPika's profile picture: a cheerful yellow and white fox with a sparkling golden ring" width="100%" />
       <br />
       <strong><samp>🍈 MelonPika</samp></strong>
       <br />
