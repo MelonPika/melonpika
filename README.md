@@ -77,7 +77,7 @@
 
 <p align="center"><sub>Click a badge to view its public Credly verification record.</sub></p>
 
-<p align="center"><a href="https://me.developers.google.com/u/106734451394183812167"><img src="assets/profile/badges/google-profile.svg" alt="Google Developer Program: MelonPika's public profile" /></a> · <samp>[Add Microsoft Learn profile]</samp><br /><sub>All four Google badges link to my public profile. Microsoft Learn entries are placeholders for future achievements.</sub></p>
+<p align="center"><a href="https://me.developers.google.com/u/106734451394183812167"><img src="assets/profile/badges/google-profile.svg" alt="Google Developer Program: MelonPika's public profile" /></a><br /><sub>All four Google badges link to my public profile.</sub></p>
 
 <h3 align="center">Google Developer Program · 4 verified badges</h3>
 
@@ -113,21 +113,6 @@
       </a>
       <br /><sub>Google Developer Program<br />Joined Oct 24, 2026</sub>
     </td>
-  </tr>
-</table>
-
-<h3 align="center">Microsoft Learn · [Add verified achievements]</h3>
-
-<table align="center" width="100%">
-  <tr>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning badge placeholder" width="80" height="80" /><br /><strong>[Add module badge]</strong></td>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning badge placeholder" width="80" height="80" /><br /><strong>[Add module badge]</strong></td>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning badge placeholder" width="80" height="80" /><br /><strong>[Add module badge]</strong></td>
-  </tr>
-  <tr>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning trophy placeholder" width="80" height="80" /><br /><strong>[Add path trophy]</strong></td>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning trophy placeholder" width="80" height="80" /><br /><strong>[Add path trophy]</strong></td>
-    <td align="center" width="33%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Microsoft learning badge placeholder" width="80" height="80" /><br /><strong>[Add module badge]</strong></td>
   </tr>
 </table>
 
