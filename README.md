@@ -77,12 +77,35 @@
 
 <p align="center"><sub>Click a badge to view its public Credly verification record.</sub></p>
 
-<p align="center"><a href="https://me.developers.google.com/u/106734451394183812167"><img src="assets/profile/badges/google-profile.svg" alt="Google Developer Program: MelonPika's public profile" /></a> · <samp>[Add Microsoft Learn profile]</samp><br /><sub>The Google membership badge is verified. Unfilled Google and Microsoft entries are placeholders for future achievements.</sub></p>
+<p align="center"><a href="https://me.developers.google.com/u/106734451394183812167"><img src="assets/profile/badges/google-profile.svg" alt="Google Developer Program: MelonPika's public profile" /></a> · <samp>[Add Microsoft Learn profile]</samp><br /><sub>All four Google badges link to my public profile. Microsoft Learn entries are placeholders for future achievements.</sub></p>
 
-<h3 align="center">Google Developer Program · 1 verified badge</h3>
+<h3 align="center">Google Developer Program · 4 verified badges</h3>
 
 <table align="center" width="100%">
   <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="https://me.developers.google.com/u/106734451394183812167">
+        <img src="assets/profile/badges/google-gdg-discovery.svg" alt="Google Developer Group discovery — verified Google Developer Program badge" width="96" height="96" />
+        <br /><strong>Google Developer Group discovery</strong>
+      </a>
+      <br /><sub>Google Developer Program<br />Earned Oct 24, 2026</sub>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="https://me.developers.google.com/u/106734451394183812167">
+        <img src="assets/profile/badges/google-gdg-campus-member.svg" alt="Google Developer Group on Campus member — verified Google Developer Program badge" width="96" height="96" />
+        <br /><strong>Google Developer Group on Campus member</strong>
+      </a>
+      <br /><sub>Google Developer Program<br />Earned Oct 24, 2026</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="https://me.developers.google.com/u/106734451394183812167">
+        <img src="assets/profile/badges/google-gdg-nyp-member.svg" alt="GDG on Campus Nanyang Polytechnic - Singapore, Singapore Member — verified Google Developer Program badge" width="96" height="96" />
+        <br /><strong>GDG on Campus Nanyang Polytechnic - Singapore, Singapore Member</strong>
+      </a>
+      <br /><sub>Google Developer Program<br />Earned Oct 24, 2026</sub>
+    </td>
     <td align="center" valign="top" width="50%">
       <a href="https://me.developers.google.com/u/106734451394183812167">
         <img src="assets/profile/badges/google-developer-program.svg" alt="Joined the Google Developer Program — verified Google Developer Program badge" width="96" height="96" />
@@ -90,11 +113,6 @@
       </a>
       <br /><sub>Google Developer Program<br />Joined Oct 24, 2026</sub>
     </td>
-    <td align="center" valign="top" width="50%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Google learning badge placeholder" width="96" height="96" /><br /><strong>[Add verified badge]</strong></td>
-  </tr>
-  <tr>
-    <td align="center" valign="top" width="50%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Google learning badge placeholder" width="96" height="96" /><br /><strong>[Add verified badge]</strong></td>
-    <td align="center" valign="top" width="50%"><img src="assets/profile/badge-placeholder.svg" alt="Unfilled Google learning badge placeholder" width="96" height="96" /><br /><strong>[Add verified badge]</strong></td>
   </tr>
 </table>
 

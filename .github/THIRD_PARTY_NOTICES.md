@@ -8,7 +8,7 @@ Technology badges use [Shields.io](https://shields.io/) and [Simple Icons](https
 
 IBM SkillsBuild badge images are official artwork downloaded from Credly and displayed with links to their public verification records in the README. Additional image-source and credential notes are retained locally.
 
-The Google Developer Program badge uses Google's official badge artwork and links to the public Google Developer profile shown in the README. Image-source and earned-date notes are retained locally.
+The four Google Developer Program badges use Google's official badge artwork and link to the public Google Developer profile shown in the README. They cover joining the program, GDG discovery, GDG on Campus membership, and GDG on Campus Nanyang Polytechnic membership. Image-source and earned-date notes are retained locally.
 
 ## github-profile-3d-contrib
 
