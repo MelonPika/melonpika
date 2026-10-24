@@ -7,6 +7,8 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/scripts/generate-profile.mjs'
+      - '.github/scripts/pastel-3d.mjs'
       - '.github/workflows/snake.yml'
 
 permissions:
@@ -34,8 +36,10 @@ jobs:
           github_user_name: MelonPika
           github_token: ${{ secrets.GITHUB_TOKEN }}
           outputs: |
-            assets/profile/github-snake.svg?color_snake=%23ffaec5&color_dots=%23eee9f4,%23b9edf2,%23d7c4f3,%23ffd3b0,%23ffaec5
-            assets/profile/github-snake-dark.svg?palette=github-dark&color_snake=%23ffaec5&color_dots=%23373341,%23b9edf2,%23d7c4f3,%23ffd3b0,%23ffaec5
+            assets/profile/github-snake.svg?color_snake=%23FDD879&color_dots=%231B2029,%2337444B,%236D929A,%23B4F5FD,%23FDD879
+            assets/profile/github-snake-dark.svg?palette=github-dark&color_snake=%23FDD879&color_dots=%231B2029,%2337444B,%236D929A,%23B4F5FD,%23FDD879
+      - name: Apply cozy dark background and palette
+        run: node .github/scripts/pastel-3d.mjs --snake assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
       - name: Publish changed animations
         run: bash .github/scripts/publish-assets.sh assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
         env:
