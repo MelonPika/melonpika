@@ -5,8 +5,14 @@ import path from 'node:path';
 export const root = fileURLToPath(new URL('../../', import.meta.url));
 const out = path.join(root, 'assets/profile');
 export const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
-const languageColor = name => ({ Python: '#ffe9a3', JavaScript: '#ffd166', TypeScript: '#b9edf2', Vue: '#c5e8c5', HTML: '#ffaec5', CSS: '#bbe8f2' })[name] || '#d7c4f3';
-const theme = dark => dark ? { text: '#f1eaf7', muted: '#adbac7', title: '#ffaec5', purple: '#d7c4f3', cyan: '#b9edf2', border: '#353445', empty: '#373341' } : { text: '#3b2d4f', muted: '#756782', title: '#9c4268', purple: '#756092', cyan: '#367484', border: '#e6dce9', empty: '#eee9f4' };
+export const palette = Object.freeze({
+  background: '#0B0D12', surface: '#1B2029', primary: '#FDD879',
+  secondary: '#B4F5FD', pink: '#FFB6C1', text: '#FDFBF6', muted: '#A9B0BC',
+  border: '#303744', inset: '#11161E', contributionLow: '#37444B', contributionMid: '#6D929A'
+});
+export const languageColor = name => ({ Python: palette.primary, JavaScript: palette.text, TypeScript: palette.secondary, Vue: palette.contributionMid, HTML: palette.pink, CSS: palette.muted })[name] || palette.muted;
+// Both image variants retain the requested dark artwork, even on GitHub's light page.
+const theme = () => ({ ...palette, title: palette.primary, cyan: palette.secondary });
 const text = (x, y, label, size = 14, fill = 'currentColor', attrs = '') => `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" ${attrs}>${escape(label)}</text>`;
 const num = (x, y, value, fill, size = 34, attrs = '') => text(x, y, Number(value).toLocaleString('en-US'), size, fill, `font-family="Consolas,monospace" font-weight="700" ${attrs}`);
 export function svg(width, height, title, body, description = title) {
@@ -14,7 +20,7 @@ export function svg(width, height, title, body, description = title) {
 }
 function card(title, eyebrow, height, dark, content, description) {
   const p = theme(dark);
-  return svg(640, height, title, `<rect x=".5" y=".5" width="639" height="${height - 1}" rx="22" fill="none" stroke="${p.border}"/><g font-family="Segoe UI,Arial,sans-serif" fill="${p.text}">${text(28, 32, eyebrow, 10, p.muted, 'letter-spacing="1.7" font-family="Consolas,monospace"')}${text(28, 69, title, 27, p.text, 'font-family="Georgia,serif" font-weight="700"')}<path d="M604 36 608 48 620 52 608 56 604 68 600 56 588 52 600 48Z" fill="${p.title}" opacity=".8"/>${content(p)}</g>`, description);
+  return svg(640, height, title, `<rect x=".5" y=".5" width="639" height="${height - 1}" rx="22" fill="${p.surface}" stroke="${p.border}"/><g font-family="Segoe UI,Arial,sans-serif" fill="${p.text}">${text(28, 32, eyebrow, 10, p.muted, 'letter-spacing="1.7" font-family="Consolas,monospace"')}${text(28, 69, title, 27, p.title, 'font-family="Georgia,serif" font-weight="700"')}<path d="M604 36 608 48 620 52 608 56 604 68 600 56 588 52 600 48Z" fill="${p.pink}" opacity=".8"/>${content(p)}</g>`, description);
 }
 export function parseStats(source) {
   const value = id => {
@@ -115,20 +121,20 @@ function overviewCard(data, dark) {
   const s = data.overview;
   return card('GitHub Overview', 'LITTLE EXPERIMENTS, GROWING AT MY OWN PACE', 302, dark, p => [
     num(44, 139, s.stars, p.title), text(44, 163, 'Total Stars', 14, p.muted),
-    num(246, 139, s.commits, p.purple), text(246, 163, 'Commits · last year', 14, p.muted),
+    num(246, 139, s.commits, p.cyan), text(246, 163, 'Commits · last year', 14, p.muted),
     `<path d="M44 181H410" stroke="${p.border}"/>`,
     ...[[44, s.prs, 'Pull requests'], [174, s.issues, 'Issues'], [304, s.contribs, 'Repos · last year']].flatMap(([x, n, label]) => [num(x, 216, n, p.text, 24), text(x, 239, label, 12, p.muted)]),
-    `<circle cx="521" cy="161" r="52" fill="none" stroke="${p.border}" stroke-width="2"/>` + (s.rankProgress == null ? '' : `<circle cx="521" cy="161" r="52" fill="none" stroke="${p.purple}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${104 * Math.PI}" stroke-dashoffset="${104 * Math.PI * (1 - s.rankProgress)}" transform="rotate(-90 521 161)"/>`),
+    `<circle cx="521" cy="161" r="52" fill="none" stroke="${p.border}" stroke-width="2"/>` + (s.rankProgress == null ? '' : `<circle cx="521" cy="161" r="52" fill="none" stroke="${p.cyan}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${104 * Math.PI}" stroke-dashoffset="${104 * Math.PI * (1 - s.rankProgress)}" transform="rotate(-90 521 161)"/>`),
     text(521, 175, s.rank, 38, p.text, 'text-anchor="middle" font-family="Consolas,monospace" font-weight="700"'), text(521, 239, 'GitHub Rank', 14, p.muted, 'text-anchor="middle"'),
     text(28, 284, 'A little curiosity goes a long way. (ᵔᴥᵔ)', 12, p.muted)
   ].join(''), `${data.username}: ${s.stars} stars, ${s.commits} commits in the last year, ${s.prs} PRs, ${s.issues} issues, ${s.contribs} contributed repositories in the last year. Rank ${s.rank}; ring progress from the statistics provider.`);
 }
 function streakCard(data, dark) {
   const s = data.streak;
-  return card('Contribution Streak', 'ONE LITTLE STEP AT A TIME', 282, dark, p => `<rect x="228" y="94" width="184" height="146" rx="18" fill="none" stroke="${p.border}"/>` + [
+  return card('Contribution Streak', 'ONE LITTLE STEP AT A TIME', 282, dark, p => `<rect x="228" y="94" width="184" height="146" rx="18" fill="${p.inset}" stroke="${p.border}"/>` + [
     [120, s.totalContributions, 'Total contributions', s.totalContributions ? `Since ${s.firstContribution}` : 'No contributions yet', p.cyan, 32],
     [320, s.currentStreak.length, 'Current streak', range(s.currentStreak), p.title, 48],
-    [520, s.longestStreak.length, 'Longest streak', range(s.longestStreak), p.purple, 32]
+    [520, s.longestStreak.length, 'Longest streak', range(s.longestStreak), p.text, 32]
   ].map(([x, n, label, dates, color, size]) => num(x, 157, n, color, size, 'text-anchor="middle"') + text(x, 188, label, 14, p.text, 'text-anchor="middle"') + text(x, 214, dates, 11, p.muted, 'text-anchor="middle"')).join('') + text(28, 264, 'Every small contribution counts. (ง •̀_•́)ง', 12, p.muted), `${s.totalContributions} lifetime contributions; current streak ${s.currentStreak.length} days (${range(s.currentStreak)}); longest streak ${s.longestStreak.length} days (${range(s.longestStreak)}). Timezone: Asia/Singapore.`);
 }
 function languagesCard(data, dark) {
@@ -159,16 +165,16 @@ export function wrap(value, width = 56, maxLines = 3) {
 }
 function repositoryCard(repo, dark) {
   const p = theme(dark);
-  return svg(560, 200, repo.name, `<rect x="8.5" y="8.5" width="543" height="183" rx="6" fill="none" stroke="${p.border}"/><g font-family="Segoe UI,Arial,sans-serif">` + text(28, 46, repo.name.length > 38 ? repo.name.slice(0, 37) + '…' : repo.name, 18, dark ? p.title : '#615276', 'font-weight="600"') + `<rect x="${repo.fork ? 452 : 478}" y="28" width="${repo.fork ? 80 : 54}" height="23" rx="11.5" fill="none" stroke="${p.border}"/>` + text(repo.fork ? 492 : 505, 44, repo.fork ? 'Public fork' : 'Public', 12, p.muted, 'text-anchor="middle"') + wrap(repo.description).map((line, i) => text(28, 81 + i * 22, line, 16, p.muted)).join('') + `<circle cx="35" cy="166" r="7" fill="${languageColor(repo.language)}"/>` + text(48, 171, repo.language || 'Language not reported', 14, p.muted) + text(355, 171, `☆ ${repo.stars}   ⑂ ${repo.forks}`, 14, p.muted) + '</g>', `${repo.url}. ${repo.fork ? 'Forked repository. ' : ''}${repo.description || 'Description not provided.'}`);
+  return svg(560, 200, repo.name, `<rect x="8.5" y="8.5" width="543" height="183" rx="16" fill="${p.surface}" stroke="${p.border}"/><g font-family="Segoe UI,Arial,sans-serif">` + text(28, 46, repo.name.length > 38 ? repo.name.slice(0, 37) + '…' : repo.name, 18, p.title, 'font-weight="600"') + `<rect x="${repo.fork ? 452 : 478}" y="28" width="${repo.fork ? 80 : 54}" height="23" rx="11.5" fill="none" stroke="${p.border}"/>` + text(repo.fork ? 492 : 505, 44, repo.fork ? 'Public fork' : 'Public', 12, p.muted, 'text-anchor="middle"') + wrap(repo.description).map((line, i) => text(28, 81 + i * 22, line, 16, p.muted)).join('') + `<circle cx="35" cy="166" r="7" fill="${languageColor(repo.language)}"/>` + text(48, 171, repo.language || 'Language not reported', 14, p.muted) + text(355, 171, `☆ ${repo.stars}   ⑂ ${repo.forks}`, 14, p.muted) + '</g>', `${repo.url}. ${repo.fork ? 'Forked repository. ' : ''}${repo.description || 'Description not provided.'}`);
 }
 function activityCard(data, dark) {
   const p = theme(dark), days = data.calendar.slice(-31), max = Math.max(1, ...days.map(d => d.count));
   const points = days.map((d, i) => [65 + i * 29, 240 - d.count / max * 150]);
-  return svg(1000, 300, 'Activity over the last 31 days', `<g font-family="Segoe UI,Arial,sans-serif">${text(500, 36, 'Activity over the last 31 days', 22, dark ? p.title : '#615276', 'text-anchor="middle" font-weight="600"')}` + Array.from({ length: 5 }, (_, i) => `<path d="M65 ${90 + i * 37.5}H935" stroke="${p.border}" stroke-dasharray="3 5"/>${text(50, 95 + i * 37.5, (max * (4 - i) / 4).toFixed(max > 3 ? 0 : 2), 11, p.muted, 'text-anchor="end"')}`).join('') + `<path d="M65 240L${points.map(v => v.join(' ')).join('L')}L935 240Z" fill="#d7c4f3" opacity=".16"/><polyline points="${points.map(v => v.join(',')).join(' ')}" fill="none" stroke="#ffaec5" stroke-width="2.5"/>` + points.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="3.5" fill="#b9edf2"><title>${days[i].date}: ${days[i].count} contributions</title></circle>`).join('') + days.filter((_, i) => i % 5 === 0).map(d => text(65 + days.indexOf(d) * 29, 267, dateLabel(d.date), 12, p.muted, 'text-anchor="middle"')).join('') + '</g>', `${data.username}'s public contribution counts, ${days[0].date} to ${days.at(-1).date}. ` + days.map(d => `${d.date}: ${d.count}`).join('; '));
+  return svg(1000, 300, 'Activity over the last 31 days', `<rect x=".5" y=".5" width="999" height="299" rx="22" fill="${p.surface}" stroke="${p.border}"/><g font-family="Segoe UI,Arial,sans-serif">${text(500, 36, 'Activity over the last 31 days', 22, p.title, 'text-anchor="middle" font-weight="600"')}` + Array.from({ length: 5 }, (_, i) => `<path d="M65 ${90 + i * 37.5}H935" stroke="${p.border}" stroke-dasharray="3 5"/>${text(50, 95 + i * 37.5, (max * (4 - i) / 4).toFixed(max > 3 ? 0 : 2), 11, p.muted, 'text-anchor="end"')}`).join('') + `<path d="M65 240L${points.map(v => v.join(' ')).join('L')}L935 240Z" fill="${p.cyan}" opacity=".08"/><polyline points="${points.map(v => v.join(',')).join(' ')}" fill="none" stroke="${p.title}" stroke-width="2.5"/>` + points.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="3.5" fill="${p.cyan}"><title>${days[i].date}: ${days[i].count} contributions</title></circle>`).join('') + days.filter((_, i) => i % 5 === 0).map(d => text(65 + days.indexOf(d) * 29, 267, dateLabel(d.date), 12, p.muted, 'text-anchor="middle"')).join('') + '</g>', `${data.username}'s public contribution counts, ${days[0].date} to ${days.at(-1).date}. ` + days.map(d => `${d.date}: ${d.count}`).join('; '));
 }
 function badge(label, value, color) {
   const left = Math.ceil(label.length * 6.1 + 12), right = Math.ceil(value.length * 6.1 + 12);
-  return svg(left + right, 20, `${label}: ${value}`, `<clipPath id="badge"><rect width="${left + right}" height="20" rx="3"/></clipPath><g clip-path="url(#badge)"><path d="M0 0h${left}v20H0Z" fill="#615276"/><path d="M${left} 0h${right}v20H${left}Z" fill="${color}"/></g><g text-anchor="middle" font-family="Verdana,Arial,sans-serif" font-size="11">${text(left / 2, 14, label, 11, '#ffffff')}${text(left + right / 2, 14, value, 11, '#3b2d4f')}</g>`);
+  return svg(left + right, 20, `${label}: ${value}`, `<clipPath id="badge"><rect width="${left + right}" height="20" rx="3"/></clipPath><g clip-path="url(#badge)"><path d="M0 0h${left}v20H0Z" fill="${palette.surface}"/><path d="M${left} 0h${right}v20H${left}Z" fill="${color}"/></g><g text-anchor="middle" font-family="Verdana,Arial,sans-serif" font-size="11">${text(left / 2, 14, label, 11, palette.text)}${text(left + right / 2, 14, value, 11, palette.background)}</g>`);
 }
 export function replaceSection(readme, marker, content) {
   const begin = `<!-- BEGIN ${marker} -->`, end = `<!-- END ${marker} -->`;
@@ -187,9 +193,9 @@ async function render(data, config) {
     files.set(`languages-${suffix}.svg`, languagesCard(data, dark));
     files.set(dark ? 'activity.svg' : 'activity-light.svg', activityCard(data, dark));
   }
-  files.set('followers.svg', badge('Followers', String(data.profile.followers), '#d7c4f3'));
-  files.set('stars.svg', badge('GitHub stars', String(data.overview.stars), '#b9edf2'));
-  files.set('repositories.svg', badge('Public repos', String(data.profile.publicRepos), '#ffaec5'));
+  files.set('followers.svg', badge('Followers', String(data.profile.followers), palette.secondary));
+  files.set('stars.svg', badge('GitHub stars', String(data.overview.stars), palette.primary));
+  files.set('repositories.svg', badge('Public repos', String(data.profile.publicRepos), palette.primary));
   const selected = config.featured.map(name => {
     const repo = data.repositories.find(r => r.name.toLowerCase() === name.toLowerCase());
     if (!repo) throw new Error(`Featured repository is missing or private: ${name}`);

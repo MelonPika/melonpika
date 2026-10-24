@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - '.github/profile-3d-settings.json'
+      - '.github/scripts/generate-profile.mjs'
       - '.github/scripts/pastel-3d.mjs'
       - '.github/workflows/profile-3d.yml'
 

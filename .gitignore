@@ -15,6 +15,7 @@ dist/
 /.github/scripts/check-links.mjs
 /.github/scripts/fetch-badges.mjs
 /.github/scripts/preview.mjs
+/.github/scripts/preview-theme.mjs
 /.github/scripts/profile.test.mjs
 /.github/scripts/serve-preview.mjs
 /.github/scripts/static-assets.mjs
