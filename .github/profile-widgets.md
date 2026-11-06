@@ -41,6 +41,8 @@ The introduction uses a 28% / 72% table, with a portrait up to 210 pixels wide. 
 
 The portrait's SVG mask makes the space outside the gold ring transparent. The generated charts retain the project's dark palette in both image variants. The technology and tool badges load directly from Shields.io; official credential artwork remains in `assets/profile/badges/`.
 
+When public original repositories have no language data, the language card displays an empty state. Featured repositories that become private, are renamed, or are deleted are skipped with a workflow warning; when none remain available, the section displays an empty state. Configured names are kept so a repository can reappear when it becomes public again. Service errors and malformed statistics still fail the refresh.
+
 The snake postprocessor keeps its route and body inside visible contribution cells, preserves each day's contribution level, and returns the full body to its starting pose at the animation loop. The daily workflow checks these bounds before publishing.
 
 Keep generated images in `assets/profile/`. Development caches and archived artwork belong in the ignored `.cache/` and `.local/` directories. The optional npm preview and validation tools are local to the development workspace.

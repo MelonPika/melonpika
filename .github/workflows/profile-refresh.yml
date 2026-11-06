@@ -9,6 +9,7 @@ on:
     paths:
       - '.github/profile.json'
       - '.github/scripts/generate-profile.mjs'
+      - '.github/scripts/generate-profile.test.mjs'
       - '.github/workflows/profile-refresh.yml'
       - 'README.md'
 
@@ -34,6 +35,8 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
+      - name: Check profile rendering
+        run: node --test .github/scripts/generate-profile.test.mjs
       - name: Fetch verified public data and render local cards
         run: node .github/scripts/generate-profile.mjs
         env:

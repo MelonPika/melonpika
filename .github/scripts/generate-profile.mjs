@@ -46,6 +46,7 @@ export function parseLanguages(source) {
     if (!value) throw new Error('Invalid language data');
     return { name: value[1].replaceAll('&amp;', '&'), percent: Number(value[2]) };
   });
+  if (!result.length && /<text\b[^>]*>\s*No languages data\.\s*<\/text>/.test(source)) return [];
   const total = result.reduce((n, l) => n + l.percent, 0);
   if (!result.length || total < 99 || total > 100.1 || result.some(l => l.percent < 0 || l.percent > 100)) throw new Error('Incomplete language data');
   return result;
@@ -139,6 +140,10 @@ function streakCard(data, dark) {
 }
 function languagesCard(data, dark) {
   const ls = data.languages, h = 194 + Math.ceil(ls.length / 2) * 40;
+  if (!ls.length) return card('Most Used Languages', 'THE LANGUAGES IN MY ORIGINAL REPOSITORIES', 208, dark, p =>
+    text(28, 113, 'No language data in public original repositories yet.', 16, p.text) +
+    text(28, 151, 'Forks are excluded from these statistics.', 12, p.muted),
+  'No language data in public original repositories yet. Forks are excluded.');
   return card('Most Used Languages', 'THE LANGUAGES IN MY ORIGINAL REPOSITORIES', h, dark, p => {
     let offset = 28;
     const bars = ls.map(l => {
@@ -201,10 +206,11 @@ async function render(data, config) {
   files.set('repositories.svg', badge('Public repos', String(data.profile.publicRepos), palette.primary));
   const selected = config.featured.map(name => {
     const repo = data.repositories.find(r => r.name.toLowerCase() === name.toLowerCase());
-    if (!repo) throw new Error(`Featured repository is missing or private: ${name}`);
+    if (!repo) console.warn(`Skipping unavailable public featured repository: ${name}`);
     return repo;
-  }).filter(repo => repo.fork === false);
+  }).filter(repo => repo?.fork === false);
   let featured = '<h2>✨ <samp>Featured Repositories (ง •̀_•́)ง</samp></h2>\n';
+  if (!selected.length) featured += '\n<p>No featured public repositories available right now.</p>\n';
   selected.forEach((repo, i) => {
     const name = `repositories/repo-${i + 1}`;
     for (const dark of [false, true]) files.set(`${name}-${dark ? 'dark' : 'light'}.svg`, repositoryCard(repo, dark));
