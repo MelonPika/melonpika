@@ -125,14 +125,7 @@
 <!-- BEGIN featured-repositories -->
 <h2>✨ <samp>Featured Repositories (ง •̀_•́)ง</samp></h2>
 
-<p align="left">
-  <a href="https://github.com/MelonPika/NYP">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-1-dark.svg" />
-      <img src="assets/profile/repositories/repo-1-light.svg" alt="NYP: Description not provided." width="405" />
-    </picture>
-  </a>
-</p>
+<p>No featured public repositories available right now.</p>
 <!-- END featured-repositories -->
 
 <!-- BEGIN github-stats -->
