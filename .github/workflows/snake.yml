@@ -45,7 +45,7 @@ jobs:
             assets/profile/github-snake-dark.svg?palette=github-dark&color_snake=%23FDD879&color_dots=%231B2029,%2337444B,%236D929A,%23B4F5FD,%23FDD879
       - name: Keep the snake inside the grid and apply the palette
         run: node .github/scripts/pastel-3d.mjs --snake assets/profile/github-snake.svg assets/profile/github-snake-dark.svg
-      - name: Check snake routes and animation bounds
+      - name: Check snake growth, routes, and animation bounds
         run: node --test .github/scripts/bounded-snake.test.mjs
       - name: Publish changed animations
         run: bash .github/scripts/publish-assets.sh assets/profile/github-snake.svg assets/profile/github-snake-dark.svg

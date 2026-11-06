@@ -43,6 +43,6 @@ The portrait's SVG mask makes the space outside the gold ring transparent. The g
 
 When public original repositories have no language data, the language card displays an empty state. Featured repositories that become private, are renamed, or are deleted are skipped with a workflow warning; when none remain available, the section displays an empty state. Configured names are kept so a repository can reappear when it becomes public again. Service errors and malformed statistics still fail the refresh.
 
-The snake postprocessor keeps its route and body inside visible contribution cells, preserves each day's contribution level, and returns the full body to its starting pose at the animation loop. The daily workflow checks these bounds before publishing.
+The snake postprocessor keeps its route and body inside visible contribution cells and preserves each day's contribution level. It grows by one segment for every new contribution day it eats, retaining its tail on that step. After clearing the calendar, it pauses, fades out, and restores the contribution colors before starting the next loop. The daily workflow checks growth, collisions, partial weeks, animation bounds, and repeatable rendering before publishing.
 
 Keep generated images in `assets/profile/`. Development caches and archived artwork belong in the ignored `.cache/` and `.local/` directories. The optional npm preview and validation tools are local to the development workspace.
