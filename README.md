@@ -126,10 +126,16 @@
 <h2>✨ <samp>Featured Repositories (ง •̀_•́)ง</samp></h2>
 
 <p align="left">
-  <a href="https://github.com/MelonPika/NYP">
+  <a href="https://github.com/MelonPika/PikaSpace">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-1-dark.svg" />
-      <img src="assets/profile/repositories/repo-1-light.svg" alt="NYP: Description not provided." width="405" />
+      <img src="assets/profile/repositories/repo-1-light.svg" alt="PikaSpace: PikaDesk · 皮卡桌面" width="405" />
+    </picture>
+  </a>
+  <a href="https://github.com/ShadowsLunarfox/Bilibili-Theme-Customizer-">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/profile/repositories/repo-2-dark.svg" />
+      <img src="assets/profile/repositories/repo-2-light.svg" alt="Bilibili-Theme-Customizer-: 这是一个 Chrome / Edge 扩展，可以自定义哔哩哔哩的背景、界面材质和部分导航按钮。控制面板采用 Windows 98 风格，设置保存在浏览器本地。A Chrome / Edge extension for customizing Bilibili backgrounds, glass effects, and selected navigation controls. Its settings panel has a Windows 98 style, and settings stay in your browser." width="405" />
     </picture>
   </a>
 </p>

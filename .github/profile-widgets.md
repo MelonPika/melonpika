@@ -19,7 +19,7 @@ The README keeps each section between matching `BEGIN` and `END` comments. Edit 
 ## Files to edit
 
 - [README.md](../README.md): biography, technology badges, tool badges, contact links, and learning cards. Badge URLs use Shields.io's flat style and pastel colors. VS Code and ibisPaint use text badges.
-- [profile.json](profile.json): account, display name, timezone, and featured repository names. The current project is `NYP`; the renderer excludes forks.
+- [profile.json](profile.json): account, display name, timezone, and featured repositories. Use a repository name for your own projects or `owner/name` for projects under another account. The configured projects are `NYP`, `MelonPika/PikaSpace`, and `ShadowsLunarfox/Bilibili-Theme-Customizer-`; the renderer excludes forks.
 - [profile-3d-settings.json](profile-3d-settings.json): calendar colors and animation settings.
 - [generate-profile.mjs](scripts/generate-profile.mjs): statistics, activity, repository-card layout, and the shared dark palette.
 - [snake.yml](workflows/snake.yml): snake colors and generation settings.

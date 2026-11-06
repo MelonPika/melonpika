@@ -81,11 +81,37 @@ export async function request(url, json = false) {
       const headers = { 'User-Agent': 'MelonPika-profile', Accept: json ? 'application/vnd.github+json' : '*/*' };
       if (new URL(url).hostname === 'api.github.com' && process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
       const response = await fetch(url, { headers, signal: AbortSignal.timeout(30000) });
-      if (!response.ok) throw new Error(`${new URL(url).hostname}: HTTP ${response.status}`);
+      if (!response.ok) throw Object.assign(new Error(`${new URL(url).hostname}: HTTP ${response.status}`), { status: response.status });
       return json ? await response.json() : await response.text();
-    } catch (error) { last = error; }
+    } catch (error) {
+      if (error.status === 404) throw error;
+      last = error;
+    }
   }
   throw last;
+}
+const repositoryData = r => ({
+  name: r.name, fullName: r.full_name, description: r.description, language: r.language, fork: r.fork, archived: r.archived,
+  stars: r.stargazers_count, forks: r.forks_count, url: r.html_url, pushedAt: r.pushed_at
+});
+const repositoryName = (name, username) => name.includes('/') ? name : `${username}/${name}`;
+const matchesRepository = (repo, fullName, username) =>
+  (repo.fullName || repositoryName(repo.name, username)).toLowerCase() === fullName.toLowerCase();
+export async function fetchFeaturedRepositories(config, repositories) {
+  const result = [...repositories];
+  for (const name of config.featured) {
+    const fullName = repositoryName(name, config.username);
+    if (result.some(repo => matchesRepository(repo, fullName, config.username))) continue;
+    let repo;
+    try {
+      repo = await request(`https://api.github.com/repos/${fullName.split('/').map(encodeURIComponent).join('/')}`, true);
+    } catch (error) {
+      if (error.status === 404) continue;
+      throw error;
+    }
+    if (!repo.private && repo.full_name.toLowerCase() === fullName.toLowerCase()) result.push(repositoryData(repo));
+  }
+  return result;
 }
 async function fetchData(config) {
   const user = encodeURIComponent(config.username);
@@ -104,16 +130,15 @@ async function fetchData(config) {
   for (let page = 1; ; page++) {
     const batch = await request(`https://api.github.com/users/${user}/repos?type=owner&per_page=100&sort=full_name&page=${page}`, true);
     if (!Array.isArray(batch)) throw new Error('GitHub did not return repositories');
-    repositories.push(...batch.filter(r => !r.private && r.owner.login.toLowerCase() === config.username.toLowerCase()).map(r => ({
-      name: r.name, description: r.description, language: r.language, fork: r.fork, archived: r.archived, stars: r.stargazers_count, forks: r.forks_count, url: r.html_url, pushedAt: r.pushed_at
-    })));
+    repositories.push(...batch.filter(r => !r.private && r.owner.login.toLowerCase() === config.username.toLowerCase()).map(repositoryData));
     if (batch.length < 100) break;
   }
   if (profile.login.toLowerCase() !== config.username.toLowerCase()) throw new Error('Unexpected GitHub account');
   return {
     username: config.username, fetchedAt: new Date().toISOString(), sources,
     profile: { login: profile.login, bio: profile.bio, location: profile.location, blog: profile.blog, followers: profile.followers, publicRepos: profile.public_repos, avatarUrl: profile.avatar_url },
-    repositories, overview: parseStats(overview), streak: validateStreak(streak), languages: parseLanguages(languages), calendar: parseCalendar(calendar)
+    repositories: await fetchFeaturedRepositories(config, repositories),
+    overview: parseStats(overview), streak: validateStreak(streak), languages: parseLanguages(languages), calendar: parseCalendar(calendar)
   };
 }
 const dateLabel = date => date ? new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(date + 'T00:00:00Z')) : '';
@@ -205,7 +230,8 @@ async function render(data, config) {
   files.set('stars.svg', badge('GitHub stars', String(data.overview.stars), palette.primary));
   files.set('repositories.svg', badge('Public repos', String(data.profile.publicRepos), palette.primary));
   const selected = config.featured.map(name => {
-    const repo = data.repositories.find(r => r.name.toLowerCase() === name.toLowerCase());
+    const fullName = repositoryName(name, config.username);
+    const repo = data.repositories.find(r => matchesRepository(r, fullName, config.username));
     if (!repo) console.warn(`Skipping unavailable public featured repository: ${name}`);
     return repo;
   }).filter(repo => repo?.fork === false);
