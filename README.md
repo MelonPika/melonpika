@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/profile/header.svg" alt="MelonPika's pastel waving profile header" width="100%" />
+<img src="assets/profile/header.svg" alt="MelonPika banner with a pastel starry sky, a melon slice, and a cheerful fox mascot" width="100%" />
 
 <!-- BEGIN typing-animation -->
 <p>
