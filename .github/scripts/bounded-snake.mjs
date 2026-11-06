@@ -39,7 +39,7 @@ export function planSnakeRoute(cells, length = 4) {
   const noRoute = () => new Error('No route inside the contribution cells can reach every day without intersecting the growing snake');
   if (connected.size !== cells.length) throw noRoute();
 
-  // Visit each day once so even a fully populated year can grow without collisions.
+  // A self-avoiding guide lets even a fully populated year grow without collisions.
   const columns = [...new Set(cells.map(cell => cell.x))].sort((a, b) => a - b);
   let route = columns.flatMap((x, i) => cells.filter(cell => cell.x === x).sort((a, b) => i % 2 ? b.y - a.y : a.y - b.y));
   if (!route.every((cell, i) => !i || Math.abs(cell.x - route[i - 1].x) + Math.abs(cell.y - route[i - 1].y) === 1)) {
@@ -70,6 +70,21 @@ export function planSnakeRoute(cells, length = 4) {
     if (!starts.some(search)) throw noRoute();
     route = path.map(index => cells[index]);
   }
+  // Skip empty detours by moving to the furthest adjacent day before the next
+  // meal. Advancing along the guide keeps every meal reachable and the growing
+  // body disjoint, even when a shortcut leaves some empty days unvisited.
+  const order = new Map(route.map((cell, index) => [key(cell), index]));
+  const direct = route.slice(0, length);
+  for (let current = length - 1; current < route.length - 1;) {
+    let nextMeal = current + 1;
+    while (nextMeal < route.length - 1 && route[nextMeal].color === 0) nextMeal++;
+    const next = Math.max(...neighbors[indices.get(key(route[current]))]
+      .map(index => order.get(key(cells[index])))
+      .filter(index => index > current && index <= nextMeal));
+    direct.push(route[next]);
+    current = next;
+  }
+  route = direct;
   const position = ({ x, y }) => ({ x, y });
   const poses = [route.slice(0, length).reverse().map(position)];
   for (const cell of route.slice(length)) {

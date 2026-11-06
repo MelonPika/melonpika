@@ -59,6 +59,21 @@ test('an empty calendar still has a moving, bounded snake', () => {
   assert(poses.every(pose => pose.length === 4));
 });
 
+test('sparse contributions are reached without sweeping every empty week', () => {
+  const meals = new Set(['2,5', '50,4', '50,6', '51,0', '51,1', '51,2', '51,6', '52,0', '52,5']);
+  const cells = calendar(53, 7, () => 0).map(cell => ({ ...cell, color: meals.has(key(cell)) ? 4 : 0 }));
+  const poses = planSnakeRoute(cells);
+  verifyRoute(cells, poses);
+  assert(poses.length < 100, 'The snake should take adjacent shortcuts across empty weeks');
+});
+
+test('shortcuts preserve meals along the route, including isolated contributions', () => {
+  for (const stride of [2, 7, 19, 47]) {
+    const cells = calendar(12, 7, index => index % stride === stride - 1 ? 3 : 0);
+    verifyRoute(cells, planSnakeRoute(cells));
+  }
+});
+
 test('disconnected contribution cells fail instead of being silently skipped', () => {
   const cells = [...calendar(5, 3, () => 0), { x: 10, y: 2, color: 4 }];
   assert.throws(() => planSnakeRoute(cells), /No route inside/);
